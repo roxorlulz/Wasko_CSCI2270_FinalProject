@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1461296530 source:/home/user/Dropbox/CompSci 2270/Final Project 2270/src/MusicTree.cpp
+	"MusicTree.h"
+
+1461296529 /home/user/Dropbox/CompSci 2270/Final Project 2270/include/MusicTree.h
+
+1461357918 source:/home/user/Dropbox/CompSci 2270/Final Project 2270/main.cpp
+	<iostream>
+
