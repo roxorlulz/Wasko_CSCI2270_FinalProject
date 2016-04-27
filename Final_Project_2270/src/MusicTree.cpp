@@ -202,7 +202,39 @@ void MusicTree::deleteMusicNode(string title, int tree){
                 while(minNode->leftChild != NULL){
                     minNode = minNode->leftChild;
                 }
-                if(minNode->parent == temp){
+
+                if(temp == root){//if deleting root
+                    if(minNode->parent == temp){
+                        minNode->leftChild = temp->leftChild;
+                        temp->leftChild->parent = minNode;
+                    }
+                    else{
+                        minNode->parent->leftChild = minNode->leftChild;
+                        minNode->leftChild->parent = minNode->parent;
+                        minNode->leftChild = temp->leftChild;
+                        temp->leftChild->parent = minNode;
+                    }
+                    if(tree == 0){
+                        root0 = minNode;
+                    }
+                    else if(tree == 1){
+                        root1 = minNode;
+                    }
+                    else if(tree == 2){
+                        root2 = minNode;
+                    }
+                    else if(tree == 3){
+                        root3 = minNode;
+                    }
+                    else if(tree == 4){
+                        root4 = minNode;
+                    }
+                    else if(tree == 5){
+                        root5 = minNode;
+                    }
+                }
+                else{
+                if(minNode->parent == temp){//if min is the child of deleting node
                     if(temp->parent->leftChild == temp){
                         temp->parent->leftChild = minNode;
                         minNode->parent = temp->parent;
@@ -217,7 +249,7 @@ void MusicTree::deleteMusicNode(string title, int tree){
 
                     }
                 }
-                else{
+                else{//all other cases
                     if(temp->parent->leftChild == temp){
                         if(minNode->leftChild != NULL){
                             minNode->parent->leftChild = minNode->rightChild;
@@ -251,6 +283,7 @@ void MusicTree::deleteMusicNode(string title, int tree){
 
                     }
                 }
+                }
                 cout<<"Deleted "<<temp->title<<endl;
                 delete temp;
                 songFound = true;
@@ -258,6 +291,35 @@ void MusicTree::deleteMusicNode(string title, int tree){
             }
 //          ============== ONE CHILD ====================
             else{
+                if(temp == root){
+                    MusicNode * x = new MusicNode;
+                    if(temp->leftChild != NULL){
+                        x = temp->leftChild;
+                    }
+                    else{
+                        x = temp->rightChild;
+                    }
+                    x->parent = NULL;
+                    if(tree == 0){
+                        root0 = x;
+                    }
+                    else if(tree == 1){
+                        root1 = x;
+                    }
+                    else if(tree == 2){
+                        root2 = x;
+                    }
+                    else if(tree == 3){
+                        root3 = x;
+                    }
+                    else if(tree == 4){
+                        root4 = x;
+                    }
+                    else if(tree == 5){
+                        root5 = x;
+                    }
+                }
+                else{
                 if(temp->leftChild != NULL){
                     MusicNode * x = temp->leftChild;
                     if(temp->parent->leftChild == temp){
@@ -277,6 +339,7 @@ void MusicTree::deleteMusicNode(string title, int tree){
                         temp->parent->rightChild = x;
                     }
                     x->parent = temp->parent;
+                }
                 }
                 cout<<"Deleted "<<temp->title<<endl;
                 delete temp;
@@ -367,13 +430,20 @@ void MusicTree::PlaylistGetter(){
 }
 
 int MusicTree::PlaylistIndex(string name){
+    bool found = false;
     int i = 0;
     for(i = 0; i<Playlists.size(); i++){
         if(Playlists[i] == name){
+            found = true;
             break;
         }
     }
-    return i;
+    if(found){
+        return i;
+    }
+    else{
+        return -1;
+    }
 }
 
 void MusicTree::PlaylistSetter(string old, string New){

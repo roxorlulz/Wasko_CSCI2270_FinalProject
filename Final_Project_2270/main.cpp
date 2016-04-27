@@ -67,6 +67,12 @@ void playlistMenu(){
             getline(cin,pName);
             int element = 0;
             element = MT.PlaylistIndex(pName);
+            while(element == -1){
+                MT.PlaylistGetter();
+                cout<<"Sorry the Playlist you entered does not exist please choose one of the Playlists above."<<endl;
+                getline(cin,pName);
+                element = MT.PlaylistIndex(pName);
+            }
 
             int r;
             string t;
@@ -107,6 +113,13 @@ void playlistMenu(){
             int element = 0;
             element = MT.PlaylistIndex(pName);
 
+            while(element == -1){
+                MT.PlaylistGetter();
+                cout<<"Sorry the Playlist you entered does not exist please choose one of the Playlists above."<<endl;
+                getline(cin,pName);
+                element = MT.PlaylistIndex(pName);
+            }
+
             string title;
             cout<<"Enter a Song Name:"<<endl;
             getline(cin,title);
@@ -134,6 +147,13 @@ void playlistMenu(){
             int element = 0;
             element = MT.PlaylistIndex(pName);
 
+            while(element == -1){
+                MT.PlaylistGetter();
+                cout<<"Sorry the Playlist you entered does not exist please choose one of the Playlists above."<<endl;
+                getline(cin,pName);
+                element = MT.PlaylistIndex(pName);
+            }
+
             string title;
             cout<<"Enter a Song Name:"<<endl;
             getline(cin,title);
@@ -159,6 +179,13 @@ void playlistMenu(){
             getline(cin,pName);
             int element = 0;
             element = MT.PlaylistIndex(pName);
+
+            while(element == -1){
+                MT.PlaylistGetter();
+                cout<<"Sorry the Playlist you entered does not exist please choose one of the Playlists above."<<endl;
+                getline(cin,pName);
+                element = MT.PlaylistIndex(pName);
+            }
             MT.songPrintAZ(element);
 
             cout<<"==== PLAYLIST MENU ===="<<endl;
@@ -219,6 +246,13 @@ void playlistMenu(){
             getline(cin,pName);
             int element = 0;
             element = MT.PlaylistIndex(pName);
+
+            while(element == -1){
+                MT.PlaylistGetter();
+                cout<<"Sorry the Playlist you entered does not exist please choose one of the Playlists above."<<endl;
+                getline(cin,pName);
+                element = MT.PlaylistIndex(pName);
+            }
 
             cout<<"The number of songs in the Main Library is: "<<MT.countSongs(element)<<endl;
 
