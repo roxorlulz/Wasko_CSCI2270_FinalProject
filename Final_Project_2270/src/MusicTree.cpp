@@ -13,6 +13,7 @@ MusicTree::MusicTree()
     root3 = NULL;
     root4 = NULL;
     root5 = NULL;
+    Playlists.push_back("Main Library");
 }
 
 MusicTree::~MusicTree()
@@ -87,7 +88,7 @@ void MusicTree::insertMusicNode(int rating, string title, string artist, string 
             //cout<<"parent set"<<endl;
         }
     }
-    cout<<"Added "<<insNode->title<<" By "<<insNode->artist<<" To Main Library."<<endl;
+    cout<<"Added "<<insNode->title<<" By "<<insNode->artist<<" To "<<Playlists[tree]<<endl;
 
 }
 
@@ -114,6 +115,7 @@ void MusicTree::songPrintAZ(int tree){
 }
 
 void MusicTree::printMusicAZ(MusicNode * node){
+    if(node != NULL){
 
     if(node->leftChild != NULL){
         printMusicAZ(node->leftChild);//recursive program to call the left most then down the list
@@ -123,35 +125,67 @@ void MusicTree::printMusicAZ(MusicNode * node){
     if(node->rightChild != NULL){
         printMusicAZ(node->rightChild);
     }
+    }
+    else{
+        cout<<"You have to put something in the playlist to print it, Silly!"<<endl;
+    }
 
 }
 
 void MusicTree::deleteMusicNode(string title, int tree){
     bool songFound = false;
     MusicNode * temp = new MusicNode;
+    MusicNode * root = new MusicNode;
     if(tree == 0){
         temp = root0;
+        root = root0;
     }
     else if(tree == 1){
         temp = root1;
+        root = root1;
     }
     else if(tree == 2){
         temp = root2;
+        root = root2;
     }
     else if(tree == 3){
         temp = root3;
+        root = root3;
     }
     else if(tree == 4){
         temp = root4;
+        root = root4;
     }
     else if(tree == 5){
         temp = root5;
+        root = root5;
     }
     while(temp != NULL){
         if(temp->title == title){
-
+//          ============= NO CHILDREN =====================
             if(temp->leftChild == NULL and temp->rightChild == NULL){
-                if(temp->parent->leftChild == temp){
+                if(temp == root){
+                    root = NULL;
+                    if(tree == 0){
+                        root0 = NULL;
+                    }
+                    else if(tree == 1){
+                        root1 = NULL;
+                    }
+                    else if(tree == 2){
+                        root2 = NULL;
+                    }
+                    else if(tree == 3){
+                        root3 = NULL;
+                    }
+                    else if(tree == 4){
+                        root4 = NULL;
+                    }
+                    else if(tree == 5){
+                        root5 = NULL;
+                    }
+                }
+                else if(temp->parent->leftChild == temp){
                     temp->parent->leftChild = NULL;
                 }
                 else{
@@ -162,8 +196,8 @@ void MusicTree::deleteMusicNode(string title, int tree){
             songFound = true;
             break;
             }
-
-            else if(temp->leftChild= NULL and temp->rightChild != NULL){
+//          ================== BOTH CHILDREN ======================
+            else if(temp->leftChild != NULL and temp->rightChild != NULL){
                 MusicNode * minNode = temp->rightChild;
                 while(minNode->leftChild != NULL){
                     minNode = minNode->leftChild;
@@ -222,6 +256,7 @@ void MusicTree::deleteMusicNode(string title, int tree){
                 songFound = true;
                 break;
             }
+//          ============== ONE CHILD ====================
             else{
                 if(temp->leftChild != NULL){
                     MusicNode * x = temp->leftChild;
@@ -283,7 +318,7 @@ void MusicTree::findSong(string title, int tree){
         temp = root5;
     }
     while(temp != NULL){
-        if(temp->title == title){//if movie is found print the info
+        if(temp->title == title){
             cout<<" "<<endl;
             cout<<"SONG INFORMATION"<<endl;
             cout<<"~~~~~~~~~~~~~~~~~"<<endl;
@@ -293,7 +328,7 @@ void MusicTree::findSong(string title, int tree){
             cout<<"You Rated This Song A "<<temp->rating<<" Out of 5"<<endl;
             break;
         }
-        else if(temp->title.compare(title) > 0){//if the movie isnt found move left or right based on its title
+        else if(temp->title.compare(title) > 0){
             temp = temp->leftChild;
         }
         else{
@@ -306,4 +341,88 @@ void MusicTree::findSong(string title, int tree){
     }
 
 }
+
+void MusicTree::createAPlaylist(string name){
+    bool repeat = false;
+    for(int i = 0; i<Playlists.size(); i++){
+        if(Playlists[i] == name){
+            repeat = true;
+        }
+    }
+    if(!repeat){
+        Playlists.push_back(name);
+        cout<<name<<" Added to Playlists."<<endl;
+    }
+    else{
+        cout<<"That Playlist already exists please come up with a new name."<<endl;
+    }
+}
+
+void MusicTree::PlaylistGetter(){
+    cout<<"=================="<<endl;
+    for(int i = 0; i<Playlists.size(); i++){
+        cout<<"["<<i+1<<"] "<<Playlists[i]<<endl;
+    }
+    cout<<"=================="<<endl;
+}
+
+int MusicTree::PlaylistIndex(string name){
+    int i = 0;
+    for(i = 0; i<Playlists.size(); i++){
+        if(Playlists[i] == name){
+            break;
+        }
+    }
+    return i;
+}
+
+void MusicTree::PlaylistSetter(string old, string New){
+    bool found = false;
+    for(int i = 0; i<Playlists.size(); i++){
+        if(Playlists[i] == old){
+            found = true;
+            Playlists[i] = New;
+            break;
+        }
+    }
+    if(!found){
+        cout<<"Could not find Playlist"<<endl;
+    }
+}
+
+int MusicTree::countSongs(int tree){
+    int *c = 0;
+    if(tree == 0){
+        return CountSongs(root0);
+    }
+    else if(tree == 1){
+        return CountSongs(root1);
+    }
+    else if(tree == 2){
+        return CountSongs(root2);
+    }
+    else if(tree == 3){
+        return CountSongs(root3);
+    }
+    else if(tree == 4){
+        return CountSongs(root4);
+    }
+    else if(tree == 5){
+        return CountSongs(root5);
+    }
+
+}
+
+int MusicTree::CountSongs(MusicNode* Node){
+        if (!Node){//if theres no node don't add anything
+            return 0;
+        }
+        else {
+            return CountSongs(Node->leftChild) + CountSongs(Node->rightChild) + 1;// adds one to the counter pointer
+        }
+
+}
+
+
+
 

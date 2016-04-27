@@ -7,7 +7,6 @@
 using namespace std;
 
 MusicTree MT;
-std::vector<std::string> Playlists;
 
 int mainMenu(){
     int input = 0;
@@ -17,7 +16,8 @@ int mainMenu(){
     cout<<"(3) Find A Song"<<endl;
     cout<<"(4) Print Library A-Z"<<endl;
     cout<<"(5) Play-list Menu"<<endl;
-    cout<<"(6) Quit"<<endl;
+    cout<<"(6) Count Songs In Library"<<endl;
+    cout<<"(7) Quit"<<endl;
     cin>>input;
     return input;
 
@@ -32,44 +32,210 @@ void playlistMenu(){
     cout<<"(2) Input Song To Playlist"<<endl;
     cout<<"(3) Delete Song From Playlist"<<endl;
     cout<<"(4) Find A Song"<<endl;
-    cout<<"(5) Print Playlist"<<endl;
-    cout<<"(6) Choose a Different Playlist"<<endl;
-    cout<<"(7) Back to Main Menu"<<endl;
+    cout<<"(5) Print Playlist Songs"<<endl;
+    cout<<"(6) See What Playlists You Have"<<endl;
+    cout<<"(7) Change a Playlists Name"<<endl;
+    cout<<"(8) Count Songs in Playlist"<<endl;
+    cout<<"(9) Back to Main Menu"<<endl;
     cin>>pInput;
     bool playlist = true;
     while(playlist){
         if(pInput == 1){
+            string pTitle;
+            cout<<"What would you like to call the Playlist?"<<endl;
+            cin.ignore();
+            getline(cin,pTitle);
+            MT.createAPlaylist(pTitle);
 
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
 
         }
         else if(pInput == 2){
+            string pName;
+            cout<<"Enter the Playlist you would like to access:"<<endl;
+            cin.ignore();
+            getline(cin,pName);
+            int element = 0;
+            element = MT.PlaylistIndex(pName);
+
+            int r;
+            string t;
+            string a;
+            string l;
+            cout<<"Enter a song name: "<<endl;
+            //cin.ignore();
+            getline(cin,t);
+            cout<<"Enter the artist of this song: "<<endl;
+            getline(cin,a);
+            cout<<"Enter how long the dong is here:"<<endl;
+            cout<<"The format is '_:__' (If you don't know please enter 'UNKNOWN')"<<endl;
+            getline(cin,l);
+            cout<<"What would you rate this song out of 5?"<<endl;
+            cin>>r;
+            MT.insertMusicNode(r,t,a,l,element);
+
+
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
 
 
         }
         else if(pInput == 3){
+            string pName;
+            cout<<"Enter the Playlist you would like to access:"<<endl;
+            cin.ignore();
+            getline(cin,pName);
+            int element = 0;
+            element = MT.PlaylistIndex(pName);
+
+            string title;
+            cout<<"Enter a Song Name:"<<endl;
+            getline(cin,title);
+            MT.deleteMusicNode(title, element);
+
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
 
 
         }
         else if(pInput == 4){
+            string pName;
+            cout<<"Enter the Playlist you would like to access:"<<endl;
+            cin.ignore();
+            getline(cin,pName);
+            int element = 0;
+            element = MT.PlaylistIndex(pName);
 
+            string title;
+            cout<<"Enter a Song Name:"<<endl;
+            getline(cin,title);
+            MT.findSong(title, element);
+
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
 
         }
         else if(pInput == 5){
+            string pName;
+            cout<<"Enter the Playlist you would like to access:"<<endl;
+            cin.ignore();
+            getline(cin,pName);
+            int element = 0;
+            element = MT.PlaylistIndex(pName);
+            MT.songPrintAZ(element);
 
             cout<<"==== PLAYLIST MENU ===="<<endl;
-            cout<<"(1) Input Song To Playlist"<<endl;
-            cout<<"(2) Delete Song From Playlist"<<endl;
-            cout<<"(3) Song Info"<<endl;
-            cout<<"(4) Quick Print Playlist"<<endl;
-            cout<<"(5) Print Menu"<<endl;
-            cout<<"(6) Back to Main Menu"<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
             cin>>pInput;
 
         }
         else if(pInput == 6){
+            MT.PlaylistGetter();
+
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
 
         }
         else if(pInput == 7){
+            string old;
+            string New;
+            cout<<"What is the name of the Playlist you will be changing?"<<endl;
+            cin.ignore();
+            getline(cin,old);
+            cout<<"What Do you want to re-name it?"<<endl;
+            getline(cin,New);
+            MT.PlaylistSetter(old,New);
+
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
+        }
+        else if(pInput == 8){
+            string pName;
+            cout<<"Enter the Playlist you would like to access:"<<endl;
+            cin.ignore();
+            getline(cin,pName);
+            int element = 0;
+            element = MT.PlaylistIndex(pName);
+
+            cout<<"The number of songs in the Main Library is: "<<MT.countSongs(element)<<endl;
+
+            cout<<"==== PLAYLIST MENU ===="<<endl;
+            cout<<"(1) Create a Playlist"<<endl;
+            cout<<"(2) Input Song To Playlist"<<endl;
+            cout<<"(3) Delete Song From Playlist"<<endl;
+            cout<<"(4) Find A Song"<<endl;
+            cout<<"(5) Print Playlist Songs"<<endl;
+            cout<<"(6) See What Playlists You Have"<<endl;
+            cout<<"(7) Change a Playlists Name"<<endl;
+            cout<<"(8) Count Songs in Playlist"<<endl;
+            cout<<"(9) Back to Main Menu"<<endl;
+            cin>>pInput;
+
+        }
+        else if(pInput == 9){
             break;
         }
         else{
@@ -83,7 +249,7 @@ void playlistMenu(){
 
 int main()
 {
-    Playlists.push_back("Library");
+    //Playlists.push_back("Library");
     int Rating;
     string Title;
     string Artist;
@@ -168,6 +334,10 @@ int main()
 
         }
         else if(mainInput == 6){
+            cout<<"The number of songs in the Main Library is: "<<MT.countSongs(0)<<endl;
+            mainInput = mainMenu();
+        }
+        else if(mainInput == 7){
             cout<<"Goodbye!"<<endl;
             programRunning = false;
 
