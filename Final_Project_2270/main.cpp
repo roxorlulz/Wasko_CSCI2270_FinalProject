@@ -8,7 +8,7 @@ using namespace std;
 
 MusicTree MT;
 
-int mainMenu(){
+int mainMenu(){//making the main menu a function allows for an easy way to have two menus
     int input = 0;
     cout<<"==== MAIN MENU ===="<<endl;
     cout<<"(1) Input Song To Library"<<endl;

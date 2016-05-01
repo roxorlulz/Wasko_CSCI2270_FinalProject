@@ -6,14 +6,14 @@
 			<Cursor1 position="1207" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="src/MusicTree.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9203" topLine="344" />
+			<Cursor1 position="226" topLine="358" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="src/MusicTree.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9337" topLine="233" />
+			<Cursor1 position="313" topLine="1" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

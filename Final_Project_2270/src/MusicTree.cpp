@@ -13,7 +13,7 @@ MusicTree::MusicTree()
     root3 = NULL;
     root4 = NULL;
     root5 = NULL;
-    Playlists.push_back("Main Library");
+    Playlists.push_back("Main Library");//sets the main library as the first playlist
 }
 
 MusicTree::~MusicTree()
@@ -95,7 +95,7 @@ void MusicTree::insertMusicNode(int rating, string title, string artist, string 
 void MusicTree::songPrintAZ(int tree){
     MusicNode * root = new MusicNode;
     if(tree == 0){
-        printMusicAZ(root0);
+        printMusicAZ(root0);//says which playlist to use
     }
     else if(tree == 1){
         printMusicAZ(root1);
@@ -202,19 +202,24 @@ void MusicTree::deleteMusicNode(string title, int tree){
                 while(minNode->leftChild != NULL){
                     minNode = minNode->leftChild;
                 }
-
                 if(temp == root){//if deleting root
-                    if(minNode->parent == temp){
+                    if(minNode->parent == temp){//if min is the child of the rot
                         minNode->leftChild = temp->leftChild;
                         temp->leftChild->parent = minNode;
                     }
                     else{
-                        minNode->parent->leftChild = minNode->leftChild;
-                        minNode->leftChild->parent = minNode->parent;
-                        minNode->leftChild = temp->leftChild;
-                        temp->leftChild->parent = minNode;
+                        if(minNode->leftChild != NULL){//if the minNode has a child
+                            minNode->parent->leftChild = minNode->leftChild;
+                            minNode->leftChild->parent = minNode->parent;
+                            minNode->leftChild = temp->leftChild;
+                            temp->leftChild->parent = minNode;
+                        }
+                        else{
+                            minNode->leftChild = temp->leftChild;
+                            temp->leftChild->parent = minNode;
+                        }
                     }
-                    if(tree == 0){
+                    if(tree == 0){//if block to know which playlist is used
                         root0 = minNode;
                     }
                     else if(tree == 1){
@@ -406,7 +411,7 @@ void MusicTree::findSong(string title, int tree){
 }
 
 void MusicTree::createAPlaylist(string name){
-    bool repeat = false;
+    bool repeat = false;//If the playlist already exists
     for(int i = 0; i<Playlists.size(); i++){
         if(Playlists[i] == name){
             repeat = true;
@@ -447,7 +452,7 @@ int MusicTree::PlaylistIndex(string name){
 }
 
 void MusicTree::PlaylistSetter(string old, string New){
-    bool found = false;
+    bool found = false;//making sure playlist exists
     for(int i = 0; i<Playlists.size(); i++){
         if(Playlists[i] == old){
             found = true;
@@ -462,7 +467,7 @@ void MusicTree::PlaylistSetter(string old, string New){
 
 int MusicTree::countSongs(int tree){
     int *c = 0;
-    if(tree == 0){
+    if(tree == 0){//knowing which playlist to use
         return CountSongs(root0);
     }
     else if(tree == 1){
