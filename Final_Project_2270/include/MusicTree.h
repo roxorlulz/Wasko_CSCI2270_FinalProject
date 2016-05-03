@@ -49,7 +49,7 @@ class MusicTree
     protected:
 
     private:
-        //void DeletePlaylist(MusicNode * node);
+        bool searchTree(std::string title, int tree);
         void printMusicAZ(MusicNode * node);
         int CountSongs(MusicNode *Node);
         std::vector <std::string> Playlists;

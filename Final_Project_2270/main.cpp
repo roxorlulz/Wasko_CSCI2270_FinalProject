@@ -8,8 +8,8 @@ using namespace std;
 
 MusicTree MT;
 
-int mainMenu(){//making the main menu a function allows for an easy way to have two menus
-    int input = 0;
+string mainMenu(){//making the main menu a function allows for an easy way to have two menus
+    string input;
     cout<<"==== MAIN MENU ===="<<endl;
     cout<<"(1) Input Song To Library"<<endl;
     cout<<"(2) Delete Song From Library"<<endl;
@@ -26,7 +26,7 @@ int mainMenu(){//making the main menu a function allows for an easy way to have 
 
 void playlistMenu(){
     int index = 0;
-    int pInput = 0;
+    string pInput;
     cout<<"==== PLAYLIST MENU ===="<<endl;
     cout<<"(1) Create a Playlist"<<endl;
     cout<<"(2) Input Song To Playlist"<<endl;
@@ -40,7 +40,7 @@ void playlistMenu(){
     cin>>pInput;
     bool playlist = true;
     while(playlist){
-        if(pInput == 1){
+        if(pInput == "1"){
             string pTitle;
             cout<<"What would you like to call the Playlist?"<<endl;
             cin.ignore();
@@ -60,7 +60,7 @@ void playlistMenu(){
             cin>>pInput;
 
         }
-        else if(pInput == 2){
+        else if(pInput == "2"){
             string pName;
             cout<<"Enter the Playlist you would like to access:"<<endl;
             cin.ignore();
@@ -105,7 +105,7 @@ void playlistMenu(){
 
 
         }
-        else if(pInput == 3){
+        else if(pInput == "3"){
             string pName;
             cout<<"Enter the Playlist you would like to access:"<<endl;
             cin.ignore();
@@ -139,7 +139,7 @@ void playlistMenu(){
 
 
         }
-        else if(pInput == 4){
+        else if(pInput == "4"){
             string pName;
             cout<<"Enter the Playlist you would like to access:"<<endl;
             cin.ignore();
@@ -172,7 +172,7 @@ void playlistMenu(){
             cin>>pInput;
 
         }
-        else if(pInput == 5){
+        else if(pInput == "5"){
             string pName;
             cout<<"Enter the Playlist you would like to access:"<<endl;
             cin.ignore();
@@ -201,7 +201,7 @@ void playlistMenu(){
             cin>>pInput;
 
         }
-        else if(pInput == 6){
+        else if(pInput == "6"){
             MT.PlaylistGetter();
 
             cout<<"==== PLAYLIST MENU ===="<<endl;
@@ -217,7 +217,7 @@ void playlistMenu(){
             cin>>pInput;
 
         }
-        else if(pInput == 7){
+        else if(pInput == "7"){
             string old;
             string New;
             cout<<"What is the name of the Playlist you will be changing?"<<endl;
@@ -239,7 +239,7 @@ void playlistMenu(){
             cout<<"(9) Back to Main Menu"<<endl;
             cin>>pInput;
         }
-        else if(pInput == 8){
+        else if(pInput == "8"){
             string pName;
             cout<<"Enter the Playlist you would like to access:"<<endl;
             cin.ignore();
@@ -269,7 +269,7 @@ void playlistMenu(){
             cin>>pInput;
 
         }
-        else if(pInput == 9){
+        else if(pInput == "9"){
             break;
         }
         else{
@@ -315,11 +315,12 @@ int main()
         MT.insertMusicNode(Rating, Title, Artist, Length, 0);//goes to create the tree when program starts
     }
     bool programRunning = true;
-    int mainInput = 0;
+    string mainInput;
     mainInput = mainMenu();
     while(programRunning){
-        if(mainInput == 1){
-            int r;
+        if(mainInput == "1"){
+            int rating;
+            string r;
             string t;
             string a;
             string l;
@@ -332,12 +333,19 @@ int main()
             cout<<"The format is '_:__' (If you don't know please enter 'UNKNOWN')"<<endl;
             getline(cin,l);
             cout<<"What would you rate this song out of 5?"<<endl;
-            cin>>r;
-            MT.insertMusicNode(r,t,a,l,0);
+            getline(cin,r);
+            stringstream convert(r);
+            convert>>rating;
+            if(rating>=0 && rating<5){
+                MT.insertMusicNode(rating,t,a,l,0);
+            }
+            else{
+                cout<<"Invalid rating input. Please try again."<<endl;
+            }
             mainInput = mainMenu();
 
         }
-        else if(mainInput == 2){
+        else if(mainInput == "2"){
             string title;
             cout<<"Enter a Song Name:"<<endl;
             cin.ignore();
@@ -348,7 +356,7 @@ int main()
 
 
         }
-        else if(mainInput == 3){
+        else if(mainInput == "3"){
             string title;
             cout<<"Enter a Song Name:"<<endl;
             cin.ignore();
@@ -357,21 +365,21 @@ int main()
             mainInput = mainMenu();
 
         }
-        else if(mainInput == 4){
+        else if(mainInput == "4"){
             MT.songPrintAZ(0);
             mainInput = mainMenu();
 
         }
-        else if(mainInput == 5){
+        else if(mainInput == "5"){
             playlistMenu();
             mainInput = mainMenu();
 
         }
-        else if(mainInput == 6){
+        else if(mainInput == "6"){
             cout<<"The number of songs in the Main Library is: "<<MT.countSongs(0)<<endl;
             mainInput = mainMenu();
         }
-        else if(mainInput == 7){
+        else if(mainInput == "7"){
             cout<<"Goodbye!"<<endl;
             programRunning = false;
 

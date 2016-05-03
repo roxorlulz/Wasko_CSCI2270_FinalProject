@@ -22,6 +22,10 @@ MusicTree::~MusicTree()
 }
 
 void MusicTree::insertMusicNode(int rating, string title, string artist, string length, int tree){
+    if(searchTree(title,tree)){
+        cout<<"That song already exists in this library."<<endl;
+    }
+    else{
     MusicNode * current = new MusicNode;
     if(tree == 0){
         current = root0;
@@ -63,6 +67,7 @@ void MusicTree::insertMusicNode(int rating, string title, string artist, string 
             root5 = insNode;
         }
     }
+
     else{
         while(current != NULL){
             currentP = current;
@@ -91,6 +96,8 @@ void MusicTree::insertMusicNode(int rating, string title, string artist, string 
     cout<<"Added "<<insNode->title<<" By "<<insNode->artist<<" To "<<Playlists[tree]<<endl;
 
 }
+}
+
 
 void MusicTree::songPrintAZ(int tree){
     MusicNode * root = new MusicNode;
@@ -498,6 +505,46 @@ int MusicTree::CountSongs(MusicNode* Node){
 
 }
 
+bool MusicTree::searchTree(string title, int tree){
+    MusicNode * temp = new MusicNode;
+    if(tree == 0){
+        temp = root0;
+    }
+    else if(tree == 1){
+        temp = root1;
+    }
+    else if(tree == 2){
+        temp = root2;
+    }
+    else if(tree == 3){
+        temp = root3;
+    }
+    else if(tree == 4){
+        temp = root4;
+    }
+    else if(tree == 5){
+        temp = root5;
+    }
+    while(temp != NULL){
+        if(temp->title == title){
+            break;
+        }
+        else if(temp->title.compare(title) > 0){
+            temp = temp->leftChild;
+        }
+        else{
+            temp = temp->rightChild;
+        }
+
+    }
+    if(temp == NULL){
+        return false;
+    }
+    else{
+        return true;
+    }
+
+}
 
 
 
