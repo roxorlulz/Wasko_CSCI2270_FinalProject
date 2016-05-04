@@ -419,14 +419,20 @@ void MusicTree::findSong(string title, int tree){
 
 void MusicTree::createAPlaylist(string name){
     bool repeat = false;//If the playlist already exists
-    for(int i = 0; i<Playlists.size(); i++){
+    int i = 0;
+    for(i = 0; i<Playlists.size(); i++){
         if(Playlists[i] == name){
             repeat = true;
         }
     }
     if(!repeat){
-        Playlists.push_back(name);
-        cout<<name<<" Added to Playlists."<<endl;
+        if (i < 6){ //Check if the maximum amount of playlists has been reached.
+            Playlists.push_back(name); //Create a new playlist if not.
+            cout<<name<<" Added to Playlists."<<endl;
+            }
+        else{
+            cout << "You have reached the maximum amount of playlists allowed." << endl;
+            }
     }
     else{
         cout<<"That Playlist already exists please come up with a new name."<<endl;
