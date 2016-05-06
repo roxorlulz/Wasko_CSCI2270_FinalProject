@@ -329,18 +329,20 @@ int main()
             getline(cin,t);
             cout<<"Enter the artist of this song: "<<endl;
             getline(cin,a);
-            cout<<"Enter how long the dong is here:"<<endl;
+            cout<<"Enter how long the song is here:"<<endl;
             cout<<"The format is '_:__' (If you don't know please enter 'UNKNOWN')"<<endl;
-            getline(cin,l);
-            cout<<"What would you rate this song out of 5?"<<endl;
-            getline(cin,r);
-            stringstream convert(r);
-            convert>>rating;
-            if(rating>=0 && rating<5){
-                MT.insertMusicNode(rating,t,a,l,0);
+            while(1){
+                cin>>l;
+                //52 to 47 are the ascii values of the valid time inputs
+                if(((int)l[1]>53 || (int)l[1]<48)||((int)l[2]>53 || (int)l[2]<48))cout<<"Please enter a valid input"<<endl;
+                else break;
             }
-            else{
-                cout<<"Invalid rating input. Please try again."<<endl;
+            cout<<"What would you rate this song out of 5?"<<endl;//found it
+            while(1){
+                cin>>r;
+                //52 to 47 are the ascii values of the valid time inputs
+                if((int)r[0]>53 || (int)r[0]>47)cout<<"Please enter a valid input"<<endl;
+                else break;
             }
             mainInput = mainMenu();
 
